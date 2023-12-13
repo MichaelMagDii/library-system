@@ -1,0 +1,30 @@
+version: "2.2"
+services:
+  app:
+    build: .
+    ports:
+      - 80:3055
+    depends_on:
+      - db
+    environment:
+      POSTGRES_USER: "libraryUser:"
+      POSTGRES_PASSWORD: "libraryPass"
+      POSTGRES_DB: "library_db"
+      PGHOST: "library"
+
+  db:
+    image: postgres:10
+    environment:
+      POSTGRES_USER: "libraryUser"
+      POSTGRES_PASSWORD: "libraryPass"
+      POSTGRES_DB: "library_db"
+    ports:
+      - "5433:5432"
+
+  admin:
+    image: adminer
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - 8081:8080
