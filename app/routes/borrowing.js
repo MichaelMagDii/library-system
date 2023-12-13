@@ -2,7 +2,7 @@ const controller = require('../controllers/borrowing');
 const router = require('express').Router();
 
 
-router.get('/CheckOut', async (req, res) => {
+router.post('/CheckOut', async (req, res) => {
     try {
         await controller.checkOutBook();
         res.statusCode(200);
@@ -12,7 +12,7 @@ router.get('/CheckOut', async (req, res) => {
     }
 });
 
-router.get('/return/:id', async (req, res) => {
+router.post('/return/:id', async (req, res) => {
     try {
         await controller.returnBook(req.params.id);
         res.statusCode(200);
@@ -22,7 +22,7 @@ router.get('/return/:id', async (req, res) => {
     }
 });
 
-router.get('/check/:title', async (req, res) => {
+router.post('/check/:title', async (req, res) => {
     try {
         await controller.checkIfBookExist(req.params.title);
         res.statusCode(200);
